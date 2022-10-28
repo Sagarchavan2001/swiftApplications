@@ -1,35 +1,59 @@
 //
 //  ViewController.swift
-//  apps1
+//  cricketsnaks
 //
-//  Created by STC on 21/10/22.
+//  Created by STC on 28/10/22.
 //
 
 import UIKit
 
-class ViewController: UIViewController {
+class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource {
+    let playername : [String] = ["rohit","virat","hardik","jadeja","bumrah","shami"]
+    let snaks : [String] =  ["poha","bhaji","padapav","samosa"]
     
+    
+    @IBOutlet weak var cricketTeam: UITableView!
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        cricketTeam.dataSource = self
+        cricketTeam.delegate = self
     }
-    
-    @IBOutlet weak var label1: UILabel!
-    
-    @IBAction func textField1(_ sender: Any) {
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 2
     }
-    
-    
-    @IBOutlet weak var label2: UILabel!
-    
-    
-    @IBAction func textField2(_ sender: Any) {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if section == 0
+        {
+            return self.playername.count
+        }
+        else{
+            return self.snaks.count
+        }
     }
-    
-    @IBAction func button1(_ sender: Any) {
-        let secondViewController = self.storyboard?.instantiateViewController(withIdentifier: "secondViewController")
-        navigationController?.pushViewController(secondViewController!, animated: true)
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = self.cricketTeam.dequeueReusableCell(withIdentifier: "cell")
+        if indexPath.section == 0
+        {
+         cell?.textLabel?.text = self.playername[indexPath.row]
+            cell?.backgroundColor = .orange
+            cell?.textLabel?.textColor = .yellow
+        }
+        else
+        {
+            cell?.textLabel?.text = self.snaks[indexPath.row]
+            cell?.backgroundColor = .blue
+            cell?.textLabel?.textColor = .red
+        }
+        return cell!
     }
-    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 50
+    }
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return "team player \(section)"
+    }
+    func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
+        return "footer=\(section)"
+    }
 }
 

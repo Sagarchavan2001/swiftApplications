@@ -1,8 +1,8 @@
 //
 //  SceneDelegate.swift
-//  apps1
+//  cricketsnaks
 //
-//  Created by STC on 21/10/22.
+//  Created by STC on 28/10/22.
 //
 
 import UIKit
